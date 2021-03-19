@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 /********************************************************************************************
  *                                                                                          *
@@ -8,7 +8,6 @@
  * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math    *
  *                                                                                          *
  ********************************************************************************************/
-
 
 /**
  * Returns an area of a rectangle given by width and heigth.
@@ -22,9 +21,8 @@
  *   5, 5  => 25
  */
 function getRectangleArea(width, height) {
-    throw new Error('Not implemented');
+  return width * height;
 }
-
 
 /**
  * Returns a circumference of circle given by radius.
@@ -38,7 +36,7 @@ function getRectangleArea(width, height) {
  *   0    => 0
  */
 function getCicleCircumference(radius) {
-    throw new Error('Not implemented');
+  return 2 * Math.PI * radius;
 }
 
 /**
@@ -54,7 +52,12 @@ function getCicleCircumference(radius) {
  *  -3, 3  => 0
  */
 function getAverage(value1, value2) {
-    throw new Error('Not implemented');
+  if (value1 == value2) {
+    return value1;
+  } else {
+    let answer = (value2 + value1) / 2;
+    return answer;
+  }
 }
 
 /**
@@ -73,7 +76,10 @@ function getAverage(value1, value2) {
  *   (-5,0) (10,-10) => 18.027756377319946
  */
 function getDistanceBetweenPoints(x1, y1, x2, y2) {
-    throw new Error('Not implemented');
+  let all_X = Math.abs(x1) + Math.abs(x2);
+  let all_Y = Math.abs(y1) + Math.abs(y2);
+  let result = Math.sqrt(all_X * all_X + all_Y * all_Y);
+  return result;
 }
 
 /**
@@ -89,13 +95,20 @@ function getDistanceBetweenPoints(x1, y1, x2, y2) {
  *   5*x = 0         => 0
  */
 function getLinearEquationRoot(a, b) {
-    throw new Error('Not implemented');
+  let x = 0;
+  if (a != 1) {
+    let b1 = -b;
+    x = b1 / a;
+  } else {
+    let b1 = -b;
+    x = b1 / a;
+  }
+  return x;
 }
-
 
 /**
  * Returns an angle (in radians) between two vectors given by xi and yi, coordinates in Cartesian plane
- * See details https://en.wikipedia.org/wiki/Euclidean_vector#Representations
+ * See details https://en.wikipedia.org/wiki/Euclihttps://en.wikipedia.org/wiki/Euclidean_vector#Representationsdean_vector#Representations
  *
  * @param {number} x1
  * @param {number} y1
@@ -111,9 +124,12 @@ function getLinearEquationRoot(a, b) {
  *   (0,1) (1,2)     => 0
  */
 function getAngleBetweenVectors(x1, y1, x2, y2) {
-    throw new Error('Not implemented');
+  let xi = Math.sqrt(x1 * x1 + y1 * y1);
+  let yi = Math.sqrt(x2 * x2 + y2 * y2);
+  let xiyi = x1 * x2 + y1 * y2;
+  let angle = Math.acos(xiyi / (xi * yi));
+  return angle;
 }
-
 /**
  * Returns a last digit of a integer number.
  *
@@ -126,10 +142,12 @@ function getAngleBetweenVectors(x1, y1, x2, y2) {
  *     5     => 5
  *     0     => 0
  */
-function getLastDigit(value) {
-    throw new Error('Not implemented');
-}
 
+function getLastDigit(value) {
+  value += "";
+  let lastSymbol = value.slice(-1);
+  return lastSymbol;
+}
 
 /**
  * Returns a number by given string representation.
@@ -143,7 +161,8 @@ function getLastDigit(value) {
  * '-525.5'     => -525.5
  */
 function parseNumberFromString(value) {
-    throw new Error('Not implemented');
+  let parsing = parseFloat(value);
+  return parsing;
 }
 
 /**
@@ -159,8 +178,10 @@ function parseNumberFromString(value) {
  *   3,3,3   => 5.196152422706632
  *   1,2,3   => 3.741657386773941
  */
-function getParallelipidedDiagonal(a,b,c) {
-    throw new Error('Not implemented');
+function getParallelipidedDiagonal(a, b, c) {
+  let S = a * a + b * b;
+  let result = Math.sqrt(S + c * c);
+  return result;
 }
 
 /**
@@ -169,7 +190,7 @@ function getParallelipidedDiagonal(a,b,c) {
  * @param {number} num
  * @param {number} pow
  * @return {number}
- *  
+ *
  * @example:
  *   1234, 0  => 1234
  *   1234, 1  => 1230
@@ -181,7 +202,12 @@ function getParallelipidedDiagonal(a,b,c) {
  *   1678, 3  => 2000
  */
 function roundToPowerOfTen(num, pow) {
-    throw new Error('Not implemented');
+  let repeater = Math.pow(10, pow);
+  let float = num / repeater;
+  let newnumb = Math.round(float);
+  let result = newnumb * repeater;
+  console.log(pow, result);
+  return result;
 }
 
 /**
@@ -190,7 +216,7 @@ function roundToPowerOfTen(num, pow) {
  *
  * @param {number} n
  * @return {bool}
- * 
+ *
  * @example:
  *   4 => false
  *   5 => true
@@ -202,7 +228,14 @@ function roundToPowerOfTen(num, pow) {
  *   17 => true
  */
 function isPrime(n) {
-    throw new Error('Not implemented');
+  if (n <= 3) return n > 1;
+  if (n % 2 === 0 || n % 3 === 0) return false;
+  let count = 5;
+  while (Math.pow(count, 2) <= n) {
+    if (n % count === 0 || n % (count + 2) === 0) return false;
+    count += 6;
+  }
+  return true;
 }
 
 /**
@@ -221,20 +254,25 @@ function isPrime(n) {
  *   toNumber(new Number(42), 0) => 42
  */
 function toNumber(value, def) {
-    throw new Error('Not implemented');
+  const parsed = parseInt(value, def);
+  if (isNaN(parsed)) {
+    return def;
+  } else {
+    return value;
+  }
 }
 
 module.exports = {
-    getRectangleArea: getRectangleArea,
-    getCicleCircumference: getCicleCircumference,
-    getAverage: getAverage,
-    getDistanceBetweenPoints: getDistanceBetweenPoints,
-    getLinearEquationRoot: getLinearEquationRoot,
-    getAngleBetweenVectors: getAngleBetweenVectors,
-    getLastDigit: getLastDigit,
-    parseNumberFromString: parseNumberFromString,
-    getParallelipidedDiagonal: getParallelipidedDiagonal,
-    roundToPowerOfTen: roundToPowerOfTen,
-    isPrime: isPrime,
-    toNumber: toNumber
+  getRectangleArea: getRectangleArea,
+  getCicleCircumference: getCicleCircumference,
+  getAverage: getAverage,
+  getDistanceBetweenPoints: getDistanceBetweenPoints,
+  getLinearEquationRoot: getLinearEquationRoot,
+  getAngleBetweenVectors: getAngleBetweenVectors,
+  getLastDigit: getLastDigit,
+  parseNumberFromString: parseNumberFromString,
+  getParallelipidedDiagonal: getParallelipidedDiagonal,
+  roundToPowerOfTen: roundToPowerOfTen,
+  isPrime: isPrime,
+  toNumber: toNumber,
 };

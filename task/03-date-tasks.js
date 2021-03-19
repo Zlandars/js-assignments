@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 /********************************************************************************************
  *                                                                                          *
@@ -7,7 +7,6 @@
  * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date    *
  *                                                                                          *
  ********************************************************************************************/
-
 
 /**
  * Parses a rfc2822 string date representation into date value
@@ -22,7 +21,7 @@
  *    'Sun, 17 May 1998 03:00:00 GMT+01' => Date()
  */
 function parseDataFromRfc2822(value) {
-   throw new Error('Not implemented');
+  return Date.parse(value);
 }
 
 /**
@@ -37,9 +36,8 @@ function parseDataFromRfc2822(value) {
  *    '2016-01-19T08:07:37Z' => Date()
  */
 function parseDataFromIso8601(value) {
-   throw new Error('Not implemented');
+  return Date.parse(value);
 }
-
 
 /**
  * Returns true if specified date is leap year and false otherwise
@@ -56,9 +54,17 @@ function parseDataFromIso8601(value) {
  *    Date(2015,1,1)    => false
  */
 function isLeapYear(date) {
-   throw new Error('Not implemented');
+  let year = date.getFullYear();
+  if (year % 4 != 0) {
+    return false;
+  } else if (year % 100 != 0) {
+    return true;
+  } else if (year % 400 != 0) {
+    return false;
+  } else {
+    return true;
+  }
 }
-
 
 /**
  * Returns the string represention of the timespan between two dates.
@@ -76,14 +82,38 @@ function isLeapYear(date) {
  *    Date(2000,1,1,10,0,0),  Date(2000,1,1,15,20,10,453)   => "05:20:10.453"
  */
 function timeSpanToString(startDate, endDate) {
-   throw new Error('Not implemented');
+  //   function difference(start, end) {
+  //     let dif = end - start;
+  //     return dif;
+  //   }
+  //   //milliseconds
+  //   let sss1 = startDate.getMilliseconds();
+  //   let sss2 = endDate.getMilliseconds();
+  //   let diffsss = difference(sss1, sss2);
+  //   //seconds
+  //   let ss1 = startDate.getSeconds();
+  //   let ss2 = endDate.getSeconds();
+  //   let diffss = difference(ss1, ss2);
+  //   //minutes
+  //   let mm1 = startDate.getMinutes();
+  //   let mm2 = endDate.getMinutes();
+  //   let diffmm = difference(mm1, mm2);
+  //   //hour
+  //   let HH1 = startDate.getHours();
+  //   let HH2 = endDate.getHours();
+  //   let diffHH = difference(HH1, HH2);
+  //   let parse = Data.parse(diffHH + ':' + diffmm + ':' + diffss + '.' diffsss);
+  let difference = endDate - startDate;
+  let result = Data.parse(
+    `${difference.getHours()}':'${difference.getMinutes()}':'${difference.getSeconds()}'.'${differencegetMilliseconds()}`
+  );
+  return result;
 }
-
 
 /**
  * Returns the angle (in radians) between the hands of an analog clock for the specified Greenwich time.
  * If you have problem with solution please read: https://en.wikipedia.org/wiki/Clock_angle_problem
- * 
+ *
  * @param {date} date
  * @return {number}
  *
@@ -94,14 +124,44 @@ function timeSpanToString(startDate, endDate) {
  *    Date.UTC(2016,3,5,21, 0) => Math.PI/2
  */
 function angleBetweenClockHands(date) {
-    throw new Error('Not implemented');
+  let min = date.getMinutes();
+  let hour = date.getHours();
+  let newmin = "";
+  let newhour = "";
+  switch (min) {
+    case 15:
+      newmin += Math.PI / 2;
+    case 30:
+      newmin += Math.PI;
+    case 45:
+      newmin += Math.PI / 2;
+    default:
+      newmin += 0;
+  }
+  switch (hour) {
+    case 3:
+      newhour += Math.PI / 2;
+    case 6:
+      newhour += Math.PI;
+    case 9:
+      newhour += Math.PI / 2;
+    default:
+      newhour += 0;
+  }
+  let result = "";
+  if (newmin == newhour) {
+    result += 0;
+  } else {
+    result += newhour + newmin;
+  }
+
+  return result;
 }
 
-
 module.exports = {
-    parseDataFromRfc2822: parseDataFromRfc2822,
-    parseDataFromIso8601: parseDataFromIso8601,
-    isLeapYear: isLeapYear,
-    timeSpanToString: timeSpanToString,
-    angleBetweenClockHands: angleBetweenClockHands
+  parseDataFromRfc2822: parseDataFromRfc2822,
+  parseDataFromIso8601: parseDataFromIso8601,
+  isLeapYear: isLeapYear,
+  timeSpanToString: timeSpanToString,
+  angleBetweenClockHands: angleBetweenClockHands,
 };

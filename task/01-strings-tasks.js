@@ -207,7 +207,7 @@ function getRectangleString(width, height) {
   let middlehorizont = "─";
   let rightvert = "│\n";
   let angleleftdown = "└";
-  let anglerightdown = "┘";
+  let anglerightdown = "┘\n";
   let space = " ";
   let middlestring = "│" + space.repeat(width - 2) + rightvert;
   let str =
@@ -258,17 +258,14 @@ function encodeToRot13(str) {
  *   isString(new String('test')) => true
  */
 function isString(value) {
-  let isString = "string";
-  let another = typeof value;
-  let str = "";
-  if (isString == another) {
-    str = "true";
+  if (typeof value == "string") {
+    return true;
   } else {
-    str = "false";
+    if (typeof value == "object" && value != null)
+      if (value.constructor.name == "String") return true;
+    return false;
   }
-  return str;
 }
-
 /**
  * Returns playid card id.
  *
@@ -294,7 +291,61 @@ function isString(value) {
  *   'K♠' => 51
  */
 function getCardId(value) {
-  throw new Error("Not implemented");
+  let cards = [
+    "A♣",
+    "2♣",
+    "3♣",
+    "4♣",
+    "5♣",
+    "6♣",
+    "7♣",
+    "8♣",
+    "9♣",
+    "10♣",
+    "J♣",
+    "Q♣",
+    "K♣",
+    "A♦",
+    "2♦",
+    "3♦",
+    "4♦",
+    "5♦",
+    "6♦",
+    "7♦",
+    "8♦",
+    "9♦",
+    "10♦",
+    "J♦",
+    "Q♦",
+    "K♦",
+    "A♥",
+    "2♥",
+    "3♥",
+    "4♥",
+    "5♥",
+    "6♥",
+    "7♥",
+    "8♥",
+    "9♥",
+    "10♥",
+    "J♥",
+    "Q♥",
+    "K♥",
+    "A♠",
+    "2♠",
+    "3♠",
+    "4♠",
+    "5♠",
+    "6♠",
+    "7♠",
+    "8♠",
+    "9♠",
+    "10♠",
+    "J♠",
+    "Q♠",
+    "K♠",
+  ];
+  return cards.indexOf(value);
 }
 
 module.exports = {
