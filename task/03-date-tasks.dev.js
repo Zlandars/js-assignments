@@ -1,5 +1,4 @@
 "use strict";
-
 /********************************************************************************************
  *                                                                                          *
  * Plese read the following tutorial before implementing tasks:                             *
@@ -20,10 +19,10 @@
  *    'Tue, 26 Jan 2016 13:48:02 GMT' => Date()
  *    'Sun, 17 May 1998 03:00:00 GMT+01' => Date()
  */
+
 function parseDataFromRfc2822(value) {
   return Date.parse(value);
 }
-
 /**
  * Parses an ISO 8601 string date representation into date value
  * For ISO 8601 date specification refer to : https://en.wikipedia.org/wiki/ISO_8601
@@ -35,10 +34,11 @@ function parseDataFromRfc2822(value) {
  *    '2016-01-19T16:07:37+00:00'    => Date()
  *    '2016-01-19T08:07:37Z' => Date()
  */
+
+
 function parseDataFromIso8601(value) {
   return Date.parse(value);
 }
-
 /**
  * Returns true if specified date is leap year and false otherwise
  * Please find algorithm here: https://en.wikipedia.org/wiki/Leap_year#Algorithm
@@ -53,8 +53,11 @@ function parseDataFromIso8601(value) {
  *    Date(2012,1,1)    => true
  *    Date(2015,1,1)    => false
  */
+
+
 function isLeapYear(date) {
-  let year = date.getFullYear();
+  var year = date.getFullYear();
+
   if (year % 4 != 0) {
     return false;
   } else if (year % 100 != 0) {
@@ -65,7 +68,6 @@ function isLeapYear(date) {
     return true;
   }
 }
-
 /**
  * Returns the string represention of the timespan between two dates.
  * The format of output string is "HH:mm:ss.sss"
@@ -81,24 +83,18 @@ function isLeapYear(date) {
  *    Date(2000,1,1,10,0,0),  Date(2000,1,1,10,0,0,250)     => "00:00:00.250"
  *    Date(2000,1,1,10,0,0),  Date(2000,1,1,15,20,10,453)   => "05:20:10.453"
  */
-
 //скопипастил решение
+
+
 function timeSpanToString(startDate, endDate) {
   function n0(value, count) {
     value = value.toString();
     return "0".repeat(count - value.length) + value;
   }
-  var d = new Date(
-    endDate.getTime() -
-      startDate.getTime() +
-      new Date().getTimezoneOffset() * 60 * 1000
-  );
-  return `${n0(d.getHours(), 2)}:${n0(d.getMinutes(), 2)}:${n0(
-    d.getSeconds(),
-    2
-  )}.${n0(d.getMilliseconds(), 3)}`;
-}
 
+  var d = new Date(endDate.getTime() - startDate.getTime() + new Date().getTimezoneOffset() * 60 * 1000);
+  return "".concat(n0(d.getHours(), 2), ":").concat(n0(d.getMinutes(), 2), ":").concat(n0(d.getSeconds(), 2), ".").concat(n0(d.getMilliseconds(), 3));
+}
 /**
  * Returns the angle (in radians) between the hands of an analog clock for the specified Greenwich time.
  * If you have problem with solution please read: https://en.wikipedia.org/wiki/Clock_angle_problem
@@ -112,14 +108,16 @@ function timeSpanToString(startDate, endDate) {
  *    Date.UTC(2016,3,5,18, 0) => Math.PI
  *    Date.UTC(2016,3,5,21, 0) => Math.PI/2
  */
+
+
 function angleBetweenClockHands(date) {
-  let min = date.getUTCMinutes();
-  let hour = date.getUTCHours();
-  const minuteAngle = min * 6;
-  const hourAngle = 0.5 * ((hour > 12 ? hour - 12 : hour) * 60 + min);
-  const angle = Math.abs(hourAngle - minuteAngle);
-  let min_angle = Math.min(angle, 360 - angle);
-  let result = (min_angle * Math.PI) / 180;
+  var min = date.getUTCMinutes();
+  var hour = date.getUTCHours();
+  var minuteAngle = min * 6;
+  var hourAngle = 0.5 * ((hour > 12 ? hour - 12 : hour) * 60 + min);
+  var angle = Math.abs(hourAngle - minuteAngle);
+  var min_angle = Math.min(angle, 360 - angle);
+  var result = min_angle * Math.PI / 180;
   return result;
 }
 
@@ -128,5 +126,5 @@ module.exports = {
   parseDataFromIso8601: parseDataFromIso8601,
   isLeapYear: isLeapYear,
   timeSpanToString: timeSpanToString,
-  angleBetweenClockHands: angleBetweenClockHands,
+  angleBetweenClockHands: angleBetweenClockHands
 };

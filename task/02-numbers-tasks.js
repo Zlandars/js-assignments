@@ -206,7 +206,6 @@ function roundToPowerOfTen(num, pow) {
   let float = num / repeater;
   let newnumb = Math.round(float);
   let result = newnumb * repeater;
-  console.log(pow, result);
   return result;
 }
 
