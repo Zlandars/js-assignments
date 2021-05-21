@@ -1,5 +1,4 @@
 "use strict";
-
 /********************************************************************************************
  *                                                                                          *
  * Please read the following tutorial before implementing tasks:                             *
@@ -31,13 +30,11 @@
  * @return {RegExp}
  */
 // i - Регистронезависимый поиск
+
 function getRegexForGuid() {
-  let Re = new RegExp(
-    /{[0-9A-F]{8}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{12}}/i
-  );
+  var Re = new RegExp(/{[0-9A-F]{8}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{12}}/i);
   return Re;
 }
-
 /**
  * Returns the regexp that matches all the strings from first column
  * but of them from the second
@@ -55,11 +52,12 @@ function getRegexForGuid() {
  * @return {RegExp}
  *
  */
+
+
 function getRegexForPitSpot() {
-  let Re = new RegExp(/^(pi|s|r).+/);
+  var Re = new RegExp(/^(pi|s|r).+/);
   return Re;
 }
-
 /**
  * Returns the regexp that matches all IPv4 strings in
  * 'XX.XX.XX.XX' dotted format where XX is number 0 to 255
@@ -74,13 +72,12 @@ function getRegexForPitSpot() {
  *
  * @return {RegExp}
  */
+
+
 function getRegexForIPv4() {
-  let Re = new RegExp(
-    /^((((2)[0-4][0-9])|((25)[0-5])|([0-1][0-9][0-9])|([0-9][0-9])|([0-9]))(\.)){3}(((2)[0-4][0-9])|((25)[0-5])|([0-1][0-9][0-9])|([0-9][0-9])|([0-9]))$/
-  );
+  var Re = new RegExp(/^((((2)[0-4][0-9])|((25)[0-5])|([0-1][0-9][0-9])|([0-9][0-9])|([0-9]))(\.)){3}(((2)[0-4][0-9])|((25)[0-5])|([0-1][0-9][0-9])|([0-9][0-9])|([0-9]))$/);
   return Re;
 }
-
 /**
  * Returns the regexp that matches all SSN (Social Security Number) codes in
  * 'XXX-XX-XXXX' format where X is digit, where each group can't be all zeros
@@ -95,13 +92,12 @@ function getRegexForIPv4() {
  *                                   '0S4-H1-HACK'
  * @return {RegExp}
  */
+
+
 function getRegexForSSN() {
-  let Re = new RegExp(
-    /^(((((00)[1-9])|(0)[1-9]\d)|([1-5]\d{2})|((66)[0-5])|((66)[7-9])|([7-8]\d{2}))-(((0)[1-9])|([1-9]\d))-(((000)[1-9])|((00)[1-9]\d)|((0)[1-9]\d{2})|([1-9]\d{3})))$/
-  );
+  var Re = new RegExp(/^(((((00)[1-9])|(0)[1-9]\d)|([1-5]\d{2})|((66)[0-5])|((66)[7-9])|([7-8]\d{2}))-(((0)[1-9])|([1-9]\d))-(((000)[1-9])|((00)[1-9]\d)|((0)[1-9]\d{2})|([1-9]\d{3})))$/);
   return Re;
 }
-
 /**
  * Returns the password validator regex.
  * Regex will validate a password to make sure it meets the follwing criteria:
@@ -122,6 +118,8 @@ function getRegexForSSN() {
  *   'PASSW0RD'.match(validator)  => false
  *   'Pa55'.match(validator) => false
  */
+
+
 function getPasswordValidator(minLength) {
   // let Re = new RegExp(
   //   /^(((?=.*[a-z])(?=.*[0-9])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])(?=.*[a-z]))|((?=.*[A-Z])(?=.*[a-z])(?=.*[0-9]))|((?=.*[0-9])(?=.*[A-Z])(?=.*[a-z]))|((?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])))(?=.{6,})/
@@ -135,5 +133,5 @@ module.exports = {
   getRegexForPitSpot: getRegexForPitSpot,
   getRegexForIPv4: getRegexForIPv4,
   getRegexForSSN: getRegexForSSN,
-  getPasswordValidator: getPasswordValidator,
+  getPasswordValidator: getPasswordValidator
 };
