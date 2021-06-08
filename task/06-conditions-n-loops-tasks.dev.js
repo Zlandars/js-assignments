@@ -290,7 +290,7 @@ function reverseInteger(num) {
  *   79927398713      => true
  *   4012888888881881 => true
  *   5123456789012346 => true
- *   378282246310005  => true
+ *   378282246310005  => trueß
  *   371449635398431  => true
  *
  *   4571234567890111 => false
@@ -300,14 +300,17 @@ function reverseInteger(num) {
 
 
 function isCreditCardNumber(ccn) {
-  var ccnArr = num.toString().split("").reverse();
-  var arr = [];
+  var ch = 0;
+  var num = String(ccn).replace(/\D/g, "");
+  var isOdd = num.length % 2 !== 0;
+  if ("" === num) return false;
 
-  for (var i = 1; i == ccnArr.length; i++) {
-    if (i % 2 != 0) {
-      arr.push(ccnArr[i] * 2);
-    } else arr.push(ccnArr[i]);
+  for (var i = 0; i < num.length; i++) {
+    var n = parseInt(num[i], 10);
+    ch += (isOdd | 0) === i % 2 && 9 < (n *= 2) ? n - 9 : n;
   }
+
+  return 0 === ch % 10;
 }
 /**
  * Returns the digital root of integer:
@@ -326,7 +329,17 @@ function isCreditCardNumber(ccn) {
 
 
 function getDigitalRoot(num) {
-  throw new Error("Not implemented");
+  function splitter(val) {
+    return val.toString().split("").map(function (i) {
+      return eval(i);
+    }).reduce(function (currentValue, accumulator) {
+      return currentValue + accumulator;
+    });
+  }
+
+  if (splitter(num) > 9) {
+    return splitter(splitter(num));
+  } else return splitter(num);
 }
 /**
  * Returns true if the specified string has the balanced brackets and false otherwise.
@@ -352,7 +365,46 @@ function getDigitalRoot(num) {
 
 
 function isBracketsBalanced(str) {
-  throw new Error("Not implemented");
+  console.log(str);
+  var brackets = "[]{}()<>";
+  var stack = [];
+  var _iteratorNormalCompletion = true;
+  var _didIteratorError = false;
+  var _iteratorError = undefined;
+
+  try {
+    for (var _iterator = str[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+      var bracket = _step.value;
+      var bracketsIndex = brackets.indexOf(bracket);
+
+      if (bracketsIndex === -1) {
+        continue;
+      }
+
+      if (bracketsIndex % 2 === 0) {
+        stack.push(bracketsIndex + 1);
+      } else {
+        if (stack.pop() !== bracketsIndex) {
+          return false;
+        }
+      }
+    }
+  } catch (err) {
+    _didIteratorError = true;
+    _iteratorError = err;
+  } finally {
+    try {
+      if (!_iteratorNormalCompletion && _iterator["return"] != null) {
+        _iterator["return"]();
+      }
+    } finally {
+      if (_didIteratorError) {
+        throw _iteratorError;
+      }
+    }
+  }
+
+  return stack.length === 0;
 }
 /**
  * Returns the human readable string of time period specified by the start and end time.
